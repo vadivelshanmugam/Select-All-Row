@@ -20,9 +20,9 @@ This plugin about select all / select row.
 ### Plugin Call
 ```
 $('.select-all-slave').on('click', function(e){
-			$(this).selectAll(e, 'select-slave', true); //(event, clicked element class, count flag) 
-		});
-		$('.select-slave').on('click', function(e){
-			$(this).selectRow(e, 'select-all-slave', 'select-slave', true); //(event, parent class of clicked element, clicked element class, count flag)
-		});
+  $(this).selectAll(e, 'select-slave', true); //(event, clicked element class, count flag) 
+});
+$('.select-slave').on('click', function(e){
+  $(this).selectRow(e, 'select-all-slave', 'select-slave', true); //(event, parent class of clicked element, clicked element class, count flag)
+});
 ```

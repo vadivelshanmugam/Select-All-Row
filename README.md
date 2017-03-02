@@ -1,7 +1,7 @@
 # Select-All-Row
 This plugin about select all / select row.
 
-## Decription
+### Decription
   1. When where select All checkbox, automatically slave checkbox are getting selected.
   2. When where select all Row checkbox, automatically parent checkbox getting selected.
 
@@ -25,3 +25,6 @@ $('.select-slave').on('click', function(e){
 - [X] Row 1
 - [ ] Row 2
 - [ ] Row 3
+
+### Library
+jQuery

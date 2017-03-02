@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select All / Row - jQuery Plugin</title>
+</head>
+<body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+	(function($) {
+		$.fn.selectAll = function(e, eleClass, count) { //function(event, clicked element class, count flag){} 
+			var $that = $(e.target);
+			var $parents = $that.parents('table:first');
+			var $checkBoxes = $parents.find('tr.list-row input.'+eleClass);
+
+			if($that.prop('checked')) {
+			  $checkBoxes.prop('checked', true);
+			} else {
+			  $checkBoxes.prop('checked', false);
+			}
+
+			if(count !== undefined) {
+			  var totalSelection = $parents.find('tr.list-row input.'+eleClass+':checked').length;
+			  $parents.find('.count:first').text(totalSelection);
+			}
+		  }
+		  
+		  $.fn.selectRow = function(e, parentClass, eleClass, count) { //function(event, parent class of clicked element, clicked element class, count flag){}
+			var $that = $(e.target);
+			var $parents = $that.parents('table:first');
+			var $selectAll = $parents.find('.'+parentClass);
+			var totalCheckbox = $parents.find('tr.list-row input.'+eleClass).length;
+			var totalSelection = $parents.find('tr.list-row input.'+eleClass+':checked').length;
+			
+			if(totalCheckbox === totalSelection) {
+			  $selectAll.prop('checked', true);
+			} else {
+			  $selectAll.prop('checked', false);
+			}
+
+			if(count !== undefined) {
+			  $parents.find('.count:first').text(totalSelection);
+			}
+		  }
+		  return true;
+	}(jQuery));
+
+	$(document).ready(function(){
+		$('.select-all-slave').on('click', function(e){
+			$(this).selectAll(e, 'select-slave', true);
+		});
+		$('.select-slave').on('click', function(e){
+			$(this).selectRow(e, 'select-all-slave', 'select-slave', true);
+		});
+	});
+	</script>
+</body>
+</html>
+<h3>Select All / Row</h3>
+<table>
+	<thead>
+		<tr>
+			<th>
+				<input type="checkbox" class="select-all-slave">
+				<label><i>(select all) <span class="count">0</span> checkbox selected</i></label>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="list-row">
+			<td><span class="text"><input type="checkbox" class="select-slave"><label>Checkbox 1</label></span></td>
+		</tr>
+		<tr class="list-row">
+			<td><span class="text"><input type="checkbox" class="select-slave"><label>Checkbox 2</label></span></td>
+		</tr>
+		<tr class="list-row">
+			<td><span class="text"><input type="checkbox" class="select-slave"><label>Checkbox 3</label></span></td>
+		</tr>
+	</tbody>
+</table>
